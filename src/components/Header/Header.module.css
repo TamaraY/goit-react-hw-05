@@ -1,0 +1,25 @@
+.wrapper {
+  padding: 20px;
+  background-color: gainsboro;
+  box-shadow: 10px 5px 5px gray;
+}
+
+.navigation {
+  display: flex;
+  gap: 15px;
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.link {
+  color: black;
+  font-weight: bold;
+}
+.activeLink {
+  color: red;
+}
+.wrapperLinks {
+  display: flex;
+  gap: 10px;
+}
