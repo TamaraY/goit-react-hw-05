@@ -9,7 +9,7 @@ import {
 import { fetchMovieDetails } from "../../services/api";
 import { useHttp } from "../../hooks/useHttp";
 
-import styles from "./MovieDetails.module.css";
+import styles from "./MovieDetailsPage.module.css";
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams();

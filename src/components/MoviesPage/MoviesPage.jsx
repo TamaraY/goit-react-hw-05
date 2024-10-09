@@ -1,24 +1,27 @@
 import style from "./MoviesPage.module.css";
 
-import { useState, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useSearchParams } from "react-router-dom";
 
 import { fetchMoviesByQuery } from "../../services/api";
 import MovieList from "../MovieList/MovieList";
 
 const MoviesPage = () => {
-  const [query, setQuery] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const query = searchParams.get("query") || "";
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const handleSearch = async (event) => {
+  const handleSearch = (event) => {
     event.preventDefault();
     if (!query.trim()) {
       toast.error("Please fill in the search field");
       return;
     }
+    setSearchParams({ query }); // Встановлюємо нові параметри пошуку
     setMovies([]); // Очистити попередні результати пошуку
     fetchMovies(query); // Викликаємо fetchMovies з новим запитом
   };
@@ -37,6 +40,12 @@ const MoviesPage = () => {
     }
   }, []);
 
+  useEffect(() => {
+    if (query) {
+      fetchMovies(query); // Викликаємо fetchMovies при зміні параметрів пошуку
+    }
+  }, [query, fetchMovies]);
+
   return (
     <div>
       <form onSubmit={handleSearch} className={style.form}>
@@ -44,11 +53,10 @@ const MoviesPage = () => {
           type="text"
           value={query}
           placeholder="Search..."
-          onChange={(e) => setQuery(e.target.value)}
+          onChange={(e) => setSearchParams({ query: e.target.value })}
           className={style.input}
         />
         <button type="submit" className={style.btn}>
-          {" "}
           Search
         </button>
       </form>

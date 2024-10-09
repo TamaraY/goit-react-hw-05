@@ -1,9 +1,9 @@
 import { NavLink } from "react-router-dom";
-import styles from "./Header.module.css";
+import styles from "./Navigation.module.css";
 
 import clsx from "clsx";
 
-const Header = () => {
+const Navigation = () => {
   const buildLinkClass = ({ isActive }) => {
     return clsx(styles.link, isActive && styles.activeLink);
   };
@@ -21,4 +21,4 @@ const Header = () => {
     </div>
   );
 };
-export default Header;
+export default Navigation;

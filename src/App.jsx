@@ -1,11 +1,11 @@
 import { Route, Routes } from "react-router-dom";
-import Header from "./components/Header/Header";
+import Navigation from "./components/Navigation/Navigation";
 import { lazy, Suspense } from "react";
 
 const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
 const MoviesPage = lazy(() => import("./components/MoviesPage/MoviesPage"));
 const MovieDetailsPage = lazy(() =>
-  import("./pages/MovieDetails/MovieDetails")
+  import("./pages/MovieDetailsPage/MovieDetailsPage")
 );
 const NotFoundPage = lazy(() => import("./pages/NotFound/NotFound"));
 const MovieCast = lazy(() => import("./components/MovieCast/MovieCast"));
@@ -16,7 +16,7 @@ const MovieReviews = lazy(() =>
 const App = () => {
   return (
     <>
-      <Header />
+      <Navigation />
       <Suspense fallback={<h2>Loading by suspense...</h2>}>
         <Routes>
           <Route path="/" element={<HomePage />} />
