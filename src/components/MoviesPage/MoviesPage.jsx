@@ -15,15 +15,15 @@ const MoviesPage = () => {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  const [searchValue, setSearchValue] = useState(query);
+
   const handleSearch = (event) => {
     event.preventDefault();
-    if (!query.trim()) {
+    if (!searchValue.trim()) {
       toast.error("Please fill in the search field");
       return;
     }
-    setSearchParams({ query }); // Встановлюємо нові параметри пошуку
-    setMovies([]); // Очистити попередні результати пошуку
-    fetchMovies(query); // Викликаємо fetchMovies з новим запитом
+    setSearchParams({ query: searchValue });
   };
 
   const fetchMovies = useCallback(async (query) => {
@@ -51,9 +51,9 @@ const MoviesPage = () => {
       <form onSubmit={handleSearch} className={style.form}>
         <input
           type="text"
-          value={query}
+          value={searchValue}
           placeholder="Search..."
-          onChange={(e) => setSearchParams({ query: e.target.value })}
+          onChange={(e) => setSearchValue(e.target.value)}
           className={style.input}
         />
         <button type="submit" className={style.btn}>
